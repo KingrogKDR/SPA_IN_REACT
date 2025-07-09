@@ -30,8 +30,8 @@ function App() {
   const [edited, setEdited] = useState<Record<number, Partial<Comment>>>({});
   const [loading, setLoading] = useState(false);
 
-  const notifyEdit = (value: string) => {
-    toast(`Edited as "${value}!"`, {
+  const notifyEdit = (field: keyof Comment) => {
+    toast(`${field} edited!"`, {
       hideProgressBar: true,
       autoClose: 2000,
     });
@@ -105,7 +105,7 @@ function App() {
       localStorage.setItem("editedComments", JSON.stringify(updated));
       return updated;
     });
-    notifyEdit(value);
+    notifyEdit(field);
   };
 
   const handleReset = () => {
